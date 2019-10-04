@@ -14,6 +14,18 @@ BLOCKCHAIN SETUP:\
 `testrpc`\
 `run truffle commands`\
 
+## Installation IRIS Container
+`git clone https://github.com/intersystems-community/objectscript-rest-docker-template.git:latest`
+
+'cd' to the project folder
+
+DOCKER SETUP:
+`docker build --rm -f "Docker" -t iris-docker-disrupt:`
+
+*Wait for build to complete sucessfully*
+
+`docker run ...`
+
 DATABASE SETUP:\
 Must have cockroachdb installed!
 `cd to db`\
