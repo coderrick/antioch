@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,60 @@
     <title>Antioch</title>
     <link rel="stylesheet" href="login.css">
 </head>
+
 <body>
-   <h1>Login</h1>
-   <a href="index.html">Sign in</a>
+    <h1>Welcome to Antioch</h1>
+
+    <div class="wrapper">
+        <img src="antioch2.png" height="256" width="256">
+        <div class="form-container">
+            <h2>Login</h2>
+
+            <form class="form" action="index.html">
+                <input type="text" placeholder="Username">
+                <input type="password" placeholder="Password">
+                <button type="submit" id="submit-button">Login</button>
+            </form>
+        </div>
+        <!-- Snap login -->
+        <div id="container">
+            <div id="login-button" style="cursor: pointer;font-family: Helvetica, Arial, sans-serif;"></div>
+            <div id="profile" class="hidden" style="display:none;">
+                <img id="picture" src="#" />
+                <p id="welcome">Welcome!</p>
+            </div>
+        </div>
+        <!-- Snap login  -->
 </body>
+<script>
+    window.snapKitInit = () => {
+        snap.loginkit.mountButton("login-button", {
+            clientId: "610d54aa-8e77-4ee2-b678-fb7bc8cce3dd",
+            redirectURI: "index.html",//"http://localhost:8000",
+            scopeList: [
+                "user.display_name",
+                "user.bitmoji.avatar",
+            ],
+            handleResponseCallback: () => {
+                snap.loginkit.fetchUserInfo().then(data => {
+                    document.getElementById("login-button").classList.add("hidden")
+                    document.getElementById("profile").classList.remove("hidden")
+
+                    document.getElementById("picture").src = data["data"]["me"]["bitmoji"]["avatar"]
+                    document.getElementById("welcome").innerHTML = "Welcome, " + data["data"]["me"]["displayName"] + "!"
+                })
+            },
+        })
+    }
+
+    // Load the SDK asynchronously
+    (function (d, s, id) {
+        var js, sjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "https://sdk.snapkit.com/js/v1/login.js";
+        sjs.parentNode.insertBefore(js, sjs);
+    }(document, "script", "loginkit-sdk"));
+</script>
+
 </html>

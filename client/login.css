@@ -1,1 +1,10 @@
 body{background-color:orangered;}
+
+#container{
+    display: inline-block;
+}
+  img{
+      margin:auto 0px;
+  }
+
+  
